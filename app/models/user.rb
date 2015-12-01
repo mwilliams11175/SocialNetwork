@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
         else
           return "requested"
         end
+        
       end
     end  
 
