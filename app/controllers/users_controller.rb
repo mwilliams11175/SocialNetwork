@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only:[:index]
   before_action :set_user, only:[:show]
-  def show
-  end
 
   def index
   	case params[:people] when "friends"
@@ -17,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user_id)
+  	@post = Post.new
+    @activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user_id)
   end
   
 private
